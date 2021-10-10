@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysql-pod
+  labels:
+    app: blog
+    tier: mysql
+spec:
+  containers:
+    - name: mysql
+      image: mysql:5.7
+      imagePullPolicy: IfNotPresent
+      env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: wordpress
+        - name: MYSQL_DATABASE
+          value: wordpress
+        - name: MYSQL_USER
+          value: wordpress
+        - name: MYSQL_PASSWORD
+          value: wordpress
+  nodeSelector:
+    kubernetes.io/hostname: master
