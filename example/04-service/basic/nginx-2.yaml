@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: html
+data:
+  index.html: |-
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <title>Welcome to AAAAA</title>
+    <style>
+        body {
+            width: 35em;
+            margin: 0 auto;
+            font-family: Tahoma, Verdana, Arial, sans-serif;
+        }
+    </style>
+    </head>
+    <body>
+    <h1>Welcome to AAAA!</h1>
+    <form action="/aaa.php" method="post">
+      <div>
+        <label for="forLableName">name</label>
+        <input name="userName" id="forLableName" value="su" type="text" required >
+      </div>
+      <div>
+        <label for="forLablePhone">phone</label>
+        <input name="userPhone" id="forLablePhone" value="0988" type="text">
+      </div>
+      <div>
+        <button>form-Sent</button>
+      </div>
+    </form>    
+    </body>
+    </html>
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-2
+  labels:
+    name: nginx
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    volumeMounts:
+    - mountPath: /usr/share/nginx/html
+      name: html
+  volumes:
+  - name: html
+    configMap:
+      name: html
