@@ -34,6 +34,5 @@ spec:
               mountPath: /var/lib/mysql
       volumes:
         - name: mysql-storage
-          nfs:
-            server: 192.168.2.201
-            path: /nfs/data1
+          persistentVolumeClaim:
+            claimName: nfs-sc-pvc
